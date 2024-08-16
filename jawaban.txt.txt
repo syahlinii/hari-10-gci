@@ -1,0 +1,82 @@
+1. Soal 1
+Microsoft Windows [Version 10.0.22631.3880]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP> cd C:/
+
+C:\> cd xampp\mysql\bin
+
+C:\xampp\mysql\bin> MySQL -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE myshop;
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [(none)]> USE myshop;
+Database changed
+MariaDB [myshop]> 
+2. Soal 2
+Database changed
+MariaDB [myshop]> CREATE TABLE user (
+    -> id int(12) PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> email VARCHAR(255),
+    -> password VARCHAR(255));
+
+MariaDB [myshop]> CREATE TABLE categories (
+    -> id int(12) PRIMARY KEY,
+    -> name VARCHAR(255));
+Query OK, 0 rows affected (0.037 sec)
+
+MariaDB [myshop]> CREATE TABLE item (
+    -> id int(12) PRIMARY KEY,
+    -> name VARCHAR(255),
+    -> description VARCHAR(255),
+    -> price int,
+    -> stok int,
+    -> categories_id int(12));
+Query OK, 0 rows affected (0.015 sec)
+
+
+MariaDB [myshop]> ALTER TABLE `item`
+    -> ADD CONSTRAINT `fk_item_categories1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`);
+
+3.Soal 3
+MariaDB [myshop]> INSERT INTO `user` (`id`, `name`, `email`)
+    ->  VALUES ('11', 'john doe', 'john@doe.com'),
+    ->         ('22', 'jane doe', 'jane@doe.com');
+Query OK, 2 rows affected (0.008 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [myshop]> INSERT INTO `categories` (`id`, `name`)
+    ->  VALUES ('01', 'gadget'),
+    ->         ('02', 'cloth'),
+    ->         ('03', 'men'),
+    ->         ('04', 'women'),
+    ->         ('05', 'branded');
+Query OK, 5 rows affected (0.010 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [myshop]> INSERT INTO `item` (`id`, `name`, `description`)
+    ->  VALUES ('06', 'sumsang b50', 'hape keren dari merk sumsang'),
+    ->         ('07', 'uniklooh','baju keren dari brand ternama'),
+    ->         ('08', 'IMHO watch','jam tangan anak yang jujur banget');
+Query OK, 3 rows affected (0.008 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+4.soal 4
+MariaDB [myshop]> SELECT id, name, email FROM user;
+MariaDB [myshop]> SELECT * FROM ITEM WHERE price > 1000000;
+Empty set (0.010 sec)
+MariaDB [myshop]> SELECT name FROM item WHERE name = 'sumsang b50';
+MariaDB [myshop]> SELECT * FROM categories;
+
+5.soal 5
+MariaDB [myshop]> UPDATE item SET price = 2500000 WHERE name = 'sumsang b50';
